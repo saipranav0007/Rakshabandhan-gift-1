@@ -1,7 +1,14 @@
 import type { PhotoMemory } from '../types/memory';
+import photo1 from '../assets/photos/photo1_childhood.png';
+import photo2 from '../assets/photos/photo2_fair_caps.png';
+import photo3 from '../assets/photos/photo3_growing_up.png';
+import photo4 from '../assets/photos/photo4_ferris_wheel.png';
+import photo5 from '../assets/photos/photo5_rocky_beach.png';
+import photo6 from '../assets/photos/photo6_beach_portrait.png';
+import photo7 from '../assets/photos/photo7_traditional_final.png';
 
-// Handcrafted aesthetic SVG placeholder illustrations for empty photo slots
-const createPlaceholderSVG = (title: string, subtitle: string, color: string) => {
+// Handcrafted aesthetic SVG placeholder illustrations for fallback photo slots
+export const createPlaceholderSVG = (title: string, subtitle: string, color: string) => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" width="100%" height="100%">
     <defs>
       <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -45,64 +52,64 @@ export const DEFAULT_PHOTOS: PhotoMemory[] = [
   {
     id: 'photo-1',
     slotNumber: 1,
-    title: 'Childhood',
-    description: 'Where our story and lifelong sibling bond began.',
-    imageUrl: createPlaceholderSVG('Childhood', 'Our early days together', '#f59e0b'),
-    customUploaded: false,
+    title: 'Childhood & Sibling Bond',
+    description: 'Where our story and lifelong sibling bond began with endless smiles.',
+    imageUrl: photo1,
+    customUploaded: true,
     dateLabel: 'Early Days',
   },
   {
     id: 'photo-2',
     slotNumber: 2,
-    title: 'Uncle Chips Days',
-    description: 'Eating Uncle Chips around 1st class, telling endless stories.',
-    imageUrl: createPlaceholderSVG('Uncle Chips Days', 'Stories, snacks & zero worries', '#f43f5e'),
-    customUploaded: false,
+    title: 'Uncle Chips & Outing Stories',
+    description: 'Eating snacks, endless talks, matching caps & zero worries.',
+    imageUrl: photo2,
+    customUploaded: true,
     dateLabel: '1st Class Memories',
   },
   {
     id: 'photo-3',
     slotNumber: 3,
-    title: 'Growing Up',
-    description: 'Growing up together through every phase and fight.',
-    imageUrl: createPlaceholderSVG('Growing Up', 'From little kids to who we are', '#e11d48'),
-    customUploaded: false,
+    title: 'Growing Up Together',
+    description: 'Growing up together through every phase, fight, and laugh — leaning on each other.',
+    imageUrl: photo3,
+    customUploaded: true,
     dateLabel: 'Through The Years',
   },
   {
     id: 'photo-4',
     slotNumber: 4,
-    title: 'One of our random memories',
-    description: 'The unexpected chaos and silly moments only we remember.',
-    imageUrl: createPlaceholderSVG('Random Memory', 'Pure sibling chaos', '#fbbf24'),
-    customUploaded: false,
+    title: 'Ferris Wheel & Night Lights',
+    description: 'The unexpected chaos, dizzy heights, and silly moments only we remember.',
+    imageUrl: photo4,
+    customUploaded: true,
     dateLabel: 'Unplanned Moments',
   },
   {
     id: 'photo-5',
     slotNumber: 5,
-    title: 'Recent Memory',
-    description: 'Time keeps moving, but our bond stays exactly the same.',
-    imageUrl: createPlaceholderSVG('Recent Memory', 'Still us, always', '#f59e0b'),
-    customUploaded: false,
-    dateLabel: 'Recent Times',
+    title: 'Rocky Beach Adventure',
+    description: 'Standing strong against the ocean waves — memories that last forever.',
+    imageUrl: photo5,
+    customUploaded: true,
+    dateLabel: 'Beach Trip',
   },
   {
     id: 'photo-6',
     slotNumber: 6,
-    title: 'Us',
+    title: 'Akkoi & Brother (Us)',
     description: 'The best big sister I could ever have grown up with.',
-    imageUrl: createPlaceholderSVG('Us', 'Akkoi & Brother', '#e11d48'),
-    customUploaded: false,
+    imageUrl: photo6,
+    customUploaded: true,
     dateLabel: 'Forever Siblings',
   },
   {
     id: 'photo-7',
     slotNumber: 7,
-    title: 'One Last Memory',
-    description: 'Until the next fight. 😂❤️',
-    imageUrl: createPlaceholderSVG('One Last Memory', 'Until the next fight 😂❤️', '#fbbf24'),
-    customUploaded: false,
+    title: 'Raksha Bandhan Celebration',
+    description: 'Until the next fight... I will always be there for you, Akkoi! 😂❤️',
+    imageUrl: photo7,
+    customUploaded: true,
     dateLabel: 'Always & Forever',
   },
 ];

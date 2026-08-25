@@ -5,16 +5,25 @@ import { DEFAULT_PHOTOS } from '../data/defaultContent';
 
 const DB_NAME = 'AkkoiMemoryDB';
 const STORE_NAME = 'photos';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 let dbPromise: Promise<IDBPDatabase> | null = null;
 
 function getDB() {
   if (!dbPromise) {
     dbPromise = openDB(DB_NAME, DB_VERSION, {
-      upgrade(db) {
+      upgrade(db, oldVersion) {
         if (!db.objectStoreNames.contains(STORE_NAME)) {
           db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+        }
+        if (oldVersion < 2) {
+          // Clear old placeholder data so fresh photos take effect immediately
+          try {
+            const tx = db.transaction(STORE_NAME, 'readwrite');
+            tx.objectStore(STORE_NAME).clear();
+          } catch {
+            // ignore
+          }
         }
       },
     }).catch(err => {
@@ -82,7 +91,13 @@ export async function loadAllPhotos(): Promise<PhotoMemory[]> {
       if (storedPhotos && storedPhotos.length > 0) {
         const photoMap = new Map<string, PhotoMemory>();
         DEFAULT_PHOTOS.forEach(p => photoMap.set(p.id, p));
-        storedPhotos.forEach((p: PhotoMemory) => photoMap.set(p.id, p));
+        storedPhotos.forEach((p: PhotoMemory) => {
+          // Only preserve if the user explicitly customized this with a base64 image in the modal
+          const isUserUploadedData = p.imageUrl && (p.imageUrl.startsWith('data:image/jpeg') || p.imageUrl.startsWith('data:image/png') || p.imageUrl.startsWith('data:image/webp'));
+          if (isUserUploadedData) {
+            photoMap.set(p.id, p);
+          }
+        });
         return Array.from(photoMap.values()).sort((a, b) => a.slotNumber - b.slotNumber);
       }
     }
@@ -96,7 +111,15 @@ export async function loadAllPhotos(): Promise<PhotoMemory[]> {
     if (local) {
       const parsed = JSON.parse(local);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed;
+        const photoMap = new Map<string, PhotoMemory>();
+        DEFAULT_PHOTOS.forEach(p => photoMap.set(p.id, p));
+        parsed.forEach((p: PhotoMemory) => {
+          const isUserUploadedData = p.imageUrl && (p.imageUrl.startsWith('data:image/jpeg') || p.imageUrl.startsWith('data:image/png') || p.imageUrl.startsWith('data:image/webp'));
+          if (isUserUploadedData) {
+            photoMap.set(p.id, p);
+          }
+        });
+        return Array.from(photoMap.values()).sort((a, b) => a.slotNumber - b.slotNumber);
       }
     }
   } catch (e) {

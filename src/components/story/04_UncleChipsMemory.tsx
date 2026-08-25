@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Sparkles, Heart } from 'lucide-react';
 import { soundEngine } from '../../services/audioService';
+import photo2 from '../../assets/photos/photo2_fair_caps.png';
 
 export const UncleChipsMemory: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -51,18 +52,19 @@ export const UncleChipsMemory: React.FC = () => {
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-amber-200/80 -rotate-3 border border-amber-300/60 shadow-sm opacity-90" />
               
               {/* Memory artwork container */}
-              <div className="w-full aspect-square bg-gradient-to-br from-amber-900/10 via-amber-800/5 to-amber-950/20 rounded border border-amber-200/80 flex flex-col items-center justify-center p-6 text-center overflow-hidden relative">
-                <div className="w-20 h-20 rounded-full bg-festive-gold/20 flex items-center justify-center text-4xl mb-3 shadow-inner">
-                  🍿
-                </div>
-                <div className="font-serif text-base font-bold text-amber-950 uppercase tracking-wider">
-                  Uncle Chips Days
-                </div>
-                <div className="font-handwritten text-lg text-amber-800 mt-1">
-                  1st Class Memories
-                </div>
-                <div className="text-[11px] text-amber-900/70 font-mono mt-2">
-                  Akkoi & Brother
+              <div className="w-full aspect-square rounded border border-amber-200/80 overflow-hidden relative group bg-slate-900">
+                <img
+                  src={photo2}
+                  alt="Uncle Chips & Outing Days"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-3 text-left">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-amber-300">
+                    1st Class Memories
+                  </span>
+                  <span className="font-serif text-sm font-bold text-white">
+                    Stories, Snacks & Zero Worries
+                  </span>
                 </div>
               </div>
 

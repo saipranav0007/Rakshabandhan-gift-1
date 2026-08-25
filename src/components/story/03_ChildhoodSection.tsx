@@ -1,5 +1,6 @@
 import React from 'react';
 import { Clock } from 'lucide-react';
+import photo1 from '../../assets/photos/photo1_childhood.png';
 
 export const ChildhoodSection: React.FC = () => {
   return (
@@ -34,6 +35,15 @@ export const ChildhoodSection: React.FC = () => {
           <p className="opacity-95 italic text-slate-200">
             Before all the annoying each other...
           </p>
+        </div>
+
+        {/* Childhood Memory Photo */}
+        <div className="mx-auto max-w-xs sm:max-w-sm rounded-2xl overflow-hidden border border-amber-300/40 shadow-2xl p-2 bg-amber-50/10 backdrop-blur-sm transform -rotate-1 hover:rotate-0 transition-transform duration-500">
+          <img
+            src={photo1}
+            alt="Childhood Days"
+            className="w-full aspect-[4/3.5] object-cover rounded-xl"
+          />
         </div>
 
         <div className="pt-4 border-t border-slate-800">

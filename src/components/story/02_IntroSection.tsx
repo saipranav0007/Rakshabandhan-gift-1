@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sparkles, Compass, Heart } from 'lucide-react';
 import { soundEngine } from '../../services/audioService';
+import photo7 from '../../assets/photos/photo7_traditional_final.png';
 
 interface IntroSectionProps {
   onStartStory: () => void;
@@ -33,6 +34,20 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onStartStory }) => {
               Akkoi
             </span>
             <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-festive-gold" />
+          </div>
+        </div>
+
+        {/* Festive Duo Portrait */}
+        <div className="relative mx-auto w-36 h-36 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-tr from-festive-gold via-festive-rose to-festive-amber shadow-2xl shadow-festive-amber/30 animate-pulse-glow">
+          <div className="w-full h-full rounded-full overflow-hidden border-2 border-slate-950/80 bg-slate-900">
+            <img
+              src={photo7}
+              alt="Srivalli Akkoi & Brother"
+              className="w-full h-full object-cover object-top hover:scale-110 transition-transform duration-700"
+            />
+          </div>
+          <div className="absolute -bottom-1 -right-1 p-2 rounded-full bg-festive-crimson border-2 border-festive-gold text-white text-xs shadow-lg">
+            ❤️
           </div>
         </div>
 
