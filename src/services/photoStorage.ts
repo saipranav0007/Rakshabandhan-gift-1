@@ -3,31 +3,33 @@ import type { IDBPDatabase } from 'idb';
 import type { PhotoMemory } from '../types/memory';
 import { DEFAULT_PHOTOS } from '../data/defaultContent';
 
-const DB_NAME = 'AkkoiMemoryDB';
-const STORE_NAME = 'photos';
-const DB_VERSION = 2;
+const DB_NAME = 'AkkoiMemoryDB_v4';
+const STORE_NAME = 'custom_photos';
+const DB_VERSION = 1;
+
+// Purge any old cache from previous sessions immediately
+if (typeof window !== 'undefined') {
+  try {
+    localStorage.removeItem('akkoi_photos_backup');
+    indexedDB.deleteDatabase('AkkoiMemoryDB');
+    indexedDB.deleteDatabase('AkkoiMemoryDB_v2');
+  } catch {
+    // ignore
+  }
+}
 
 let dbPromise: Promise<IDBPDatabase> | null = null;
 
 function getDB() {
   if (!dbPromise) {
     dbPromise = openDB(DB_NAME, DB_VERSION, {
-      upgrade(db, oldVersion) {
+      upgrade(db) {
         if (!db.objectStoreNames.contains(STORE_NAME)) {
           db.createObjectStore(STORE_NAME, { keyPath: 'id' });
         }
-        if (oldVersion < 2) {
-          // Clear old placeholder data so fresh photos take effect immediately
-          try {
-            const tx = db.transaction(STORE_NAME, 'readwrite');
-            tx.objectStore(STORE_NAME).clear();
-          } catch {
-            // ignore
-          }
-        }
       },
     }).catch(err => {
-      console.warn('IndexedDB unavailable, falling back to localStorage:', err);
+      console.warn('IndexedDB unavailable:', err);
       return null as unknown as IDBPDatabase;
     });
   }
@@ -81,7 +83,7 @@ export async function compressImage(file: File, maxDimension = 1400, quality = 0
 }
 
 /**
- * Loads all photos from IndexedDB. If empty, initializes with default memories.
+ * Loads all photos. Defaults to our bundled memories, applying any explicit custom user overrides.
  */
 export async function loadAllPhotos(): Promise<PhotoMemory[]> {
   try {
@@ -90,11 +92,9 @@ export async function loadAllPhotos(): Promise<PhotoMemory[]> {
       const storedPhotos = await db.getAll(STORE_NAME);
       if (storedPhotos && storedPhotos.length > 0) {
         const photoMap = new Map<string, PhotoMemory>();
-        DEFAULT_PHOTOS.forEach(p => photoMap.set(p.id, p));
+        DEFAULT_PHOTOS.forEach(p => photoMap.set(p.id, { ...p }));
         storedPhotos.forEach((p: PhotoMemory) => {
-          // Only preserve if the user explicitly customized this with a base64 image in the modal
-          const isUserUploadedData = p.imageUrl && (p.imageUrl.startsWith('data:image/jpeg') || p.imageUrl.startsWith('data:image/png') || p.imageUrl.startsWith('data:image/webp'));
-          if (isUserUploadedData) {
+          if (p.imageUrl && (p.imageUrl.startsWith('data:image/jpeg') || p.imageUrl.startsWith('data:image/png') || p.imageUrl.startsWith('data:image/webp'))) {
             photoMap.set(p.id, p);
           }
         });
@@ -107,15 +107,14 @@ export async function loadAllPhotos(): Promise<PhotoMemory[]> {
 
   // Fallback check in localStorage
   try {
-    const local = localStorage.getItem('akkoi_photos_backup');
+    const local = localStorage.getItem('akkoi_photos_v4');
     if (local) {
       const parsed = JSON.parse(local);
       if (Array.isArray(parsed) && parsed.length > 0) {
         const photoMap = new Map<string, PhotoMemory>();
-        DEFAULT_PHOTOS.forEach(p => photoMap.set(p.id, p));
+        DEFAULT_PHOTOS.forEach(p => photoMap.set(p.id, { ...p }));
         parsed.forEach((p: PhotoMemory) => {
-          const isUserUploadedData = p.imageUrl && (p.imageUrl.startsWith('data:image/jpeg') || p.imageUrl.startsWith('data:image/png') || p.imageUrl.startsWith('data:image/webp'));
-          if (isUserUploadedData) {
+          if (p.imageUrl && (p.imageUrl.startsWith('data:image/jpeg') || p.imageUrl.startsWith('data:image/png') || p.imageUrl.startsWith('data:image/webp'))) {
             photoMap.set(p.id, p);
           }
         });
@@ -156,7 +155,7 @@ export async function savePhoto(photo: PhotoMemory): Promise<void> {
     } else {
       current.push(updatedPhoto);
     }
-    localStorage.setItem('akkoi_photos_backup', JSON.stringify(current));
+    localStorage.setItem('akkoi_photos_v4', JSON.stringify(current));
   } catch (e) {
     console.warn('Could not update localStorage backup:', e);
   }
