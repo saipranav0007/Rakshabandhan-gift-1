@@ -132,10 +132,10 @@ That's the promise I can give you.
 
 And please... don't expect costly gifts from me. 😭😂
 
-You know I'm still your brother.
+You know I'm still your younger brother.
 
 But jokes apart...
 
 I'll always be there for you, Akkoi. ❤️
 
-— Your Brother`;
+— Your Brother (Tammudu) ❤️`;

@@ -123,7 +123,7 @@ export const SupportInteraction: React.FC = () => {
           className="px-6 py-2.5 rounded-full bg-gradient-to-r from-festive-gold to-festive-amber text-slate-950 font-serif font-bold text-xs sm:text-sm shadow-md hover:scale-105 transition-all flex items-center justify-center gap-2 mx-auto"
         >
           <Sparkles className="w-4 h-4 text-slate-950" />
-          <span>{isCalled ? 'Connected! Annaya is listening... ❤️' : 'Test Hotline Connection 📞'}</span>
+          <span>{isCalled ? 'Connected! Tammudu is listening... ❤️' : 'Test Hotline Connection 📞'}</span>
         </button>
 
         {isCalled && (

@@ -68,7 +68,7 @@ export const PromiseLetter: React.FC<PromiseLetterProps> = ({ isVisible }) => {
               <span className="text-2xl">😭😂</span>
             </p>
             <p className="text-slate-300 text-xl sm:text-2xl">
-              You know I'm still your brother.
+              You know I'm still your younger brother.
             </p>
           </div>
 
@@ -88,7 +88,7 @@ export const PromiseLetter: React.FC<PromiseLetterProps> = ({ isVisible }) => {
               Signed with lifelong love,
             </p>
             <p className="font-handwritten text-3xl sm:text-5xl text-festive-amber font-bold">
-              — Your Brother (Annaya)
+              — Your Brother (Tammudu) ❤️
             </p>
           </div>
 
