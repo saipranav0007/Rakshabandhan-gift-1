@@ -14,13 +14,13 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onStartStory }) => {
   };
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-4 py-16 text-center relative z-10">
+    <section className="min-h-screen flex flex-col items-center justify-center px-4 py-16 text-center relative z-10" id="intro-section">
       <div className="max-w-2xl w-full mx-auto space-y-8">
         
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-festive-crimson/10 border border-festive-crimson/30 text-festive-rose text-xs font-semibold uppercase tracking-widest shadow-inner">
           <Heart className="w-3.5 h-3.5 fill-festive-rose" />
-          <span>A Brother's Rakhi Tribute</span>
+          <span>A Brother's Rakhi Tribute • 2026</span>
         </div>
 
         {/* Names */}
@@ -58,7 +58,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onStartStory }) => {
           </p>
 
           <p className="font-sans text-base sm:text-lg text-slate-300 leading-relaxed max-w-lg mx-auto">
-            The person I've been annoying, fighting with, laughing with, and growing up with.
+            The person I've been annoying, fighting with, laughing with, and growing up with through every single phase of life.
           </p>
 
           <div className="pt-2 flex items-center justify-center gap-6 text-xs text-slate-400 font-mono">
@@ -75,7 +75,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onStartStory }) => {
         {/* CTA */}
         <div className="space-y-4 pt-2">
           <p className="font-serif text-base sm:text-lg text-slate-300 italic">
-            Let's go back for a moment.
+            Let's travel back through our story together.
           </p>
 
           <button
@@ -84,7 +84,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onStartStory }) => {
             id="start-story-btn"
           >
             <Compass className="w-4 h-4 text-slate-950 transition-transform group-hover:rotate-45" />
-            <span>START OUR STORY</span>
+            <span>START OUR STORY 🌸</span>
             <Sparkles className="w-4 h-4 text-slate-950" />
           </button>
         </div>
