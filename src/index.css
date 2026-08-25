@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian-950: #060608;
+  --color-obsidian-900: #0b0b10;
+  --color-obsidian-850: #101017;
+  --color-obsidian-800: #171722;
+
+  --color-festive-gold: #f59e0b;
+  --color-festive-amber: #fbbf24;
+  --color-festive-crimson: #e11d48;
+  --color-festive-rose: #f43f5e;
+  --color-festive-ruby: #9f1239;
+  --color-festive-cream: #fef3c7;
+
+  --font-serif: "Cinzel", "Playfair Display", serif;
+  --font-handwritten: "Caveat", "Dancing Script", cursive;
+  --font-script: "Marck Script", "Caveat", cursive;
+  --font-sans: "Plus Jakarta Sans", "Outfit", sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    background-color: #060608;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(225, 29, 72, 0.08) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.06) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(15, 15, 20, 1) 0px, rgba(6, 6, 8, 1) 100%);
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}
+
+/* Custom Glassmorphism & Aesthetics */
+.glass-panel {
+  background: rgba(18, 18, 26, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-gold {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(18, 18, 26, 0.7) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  box-shadow: 0 10px 40px -10px rgba(245, 158, 11, 0.2);
+}
+
+.glass-panel-crimson {
+  background: linear-gradient(135deg, rgba(225, 29, 72, 0.08) 0%, rgba(18, 18, 26, 0.7) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(225, 29, 72, 0.25);
+  box-shadow: 0 10px 40px -10px rgba(225, 29, 72, 0.15);
+}
+
+/* Text glow effects */
+.glow-gold {
+  text-shadow: 0 0 20px rgba(245, 158, 11, 0.5), 0 0 40px rgba(245, 158, 11, 0.2);
+}
+
+.glow-crimson {
+  text-shadow: 0 0 20px rgba(225, 29, 72, 0.5), 0 0 40px rgba(225, 29, 72, 0.2);
+}
+
+.glow-white {
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+}
+
+/* Gold Gradient Text */
+.gold-text-gradient {
+  background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 50%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rose-text-gradient {
+  background: linear-gradient(135deg, #ffe4e6 0%, #f43f5e 50%, #e11d48 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Letter parchment aesthetic */
+.parchment {
+  background-color: #141318;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.07) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(225, 29, 72, 0.05) 0%, transparent 20%),
+    linear-gradient(rgba(245, 158, 11, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 32px;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.8),
+    inset 0 0 60px rgba(0, 0, 0, 0.6);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #060608;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.6);
+}
+
+/* Diya candle flame keyframe & styles */
+.diya-flame-core {
+  background: radial-gradient(ellipse at 50% 80%, #fff7ed 0%, #fde047 30%, #ea580c 70%, transparent 95%);
+  filter: drop-shadow(0 0 12px #f59e0b) drop-shadow(0 0 25px #ea580c);
+}
+
+@keyframes diyaFlicker {
+  0% { transform: scale(1) rotate(-1deg); opacity: 0.9; }
+  20% { transform: scale(1.08, 0.95) rotate(1deg); opacity: 1; }
+  40% { transform: scale(0.95, 1.05) rotate(-2deg); opacity: 0.85; }
+  60% { transform: scale(1.04, 0.98) rotate(2deg); opacity: 0.95; }
+  80% { transform: scale(0.98, 1.02) rotate(-1deg); opacity: 0.9; }
+  100% { transform: scale(1.05, 0.97) rotate(1deg); opacity: 1; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-flicker {
+  animation: diyaFlicker 2.5s infinite alternate;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
